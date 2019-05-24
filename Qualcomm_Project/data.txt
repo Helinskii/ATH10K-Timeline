@@ -1,0 +1,4 @@
+[ 3541.270093] ath10k_pci 0000:00:00.0: mac ampdu vdev_id 0 sta 74:70:fd:c7:50:5b tid 0 action 1
+[ 3541.270133] ath10k_pci 0000:00:00.0: mac sta 74:70:fd:c7:50:5b disassociated
+[ 3541.270167] ath10k_pci 0000:00:00.0: mac vdev 0 peer delete 74:70:fd:c7:50:5b sta 86f1f608 (sta gone)
+[ 3541.270182] ath10k_pci 0000:00:00.0: wmi peer delete vdev_id 0 peer_addr 74:70:fd:c7:50:5b

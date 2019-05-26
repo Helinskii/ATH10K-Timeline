@@ -9,9 +9,8 @@ def parse():
   for line in lines:
     match = re.findall(p,line)
     if match:
-      for mac in match:
-        if mac not in macads:
-         macads.append(mac)
+      if match[0] not in macads:
+        macads.append(match[0])
       
   if macads!=[]:
     for addr in macads:

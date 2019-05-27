@@ -1,0 +1,4 @@
+#!/bin/bash
+timeout --preserve-status 5 sshpass -p 'password' scp root@192.168.1.1:/myscript/data.txt /home/soumyarup/Qualcomm_Project
+echo 'File Received: Starting to parse'
+python3 parsing_new.py

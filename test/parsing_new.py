@@ -2,11 +2,23 @@
 
 import re
 
-p = re.compile(r'(?:[0-9a-fA-F]:?){12}')
+def display_sta():
+    mac_addr = []
 
-macads = []
-
+    try:
+        mac_file = open('mac_address.txt', 'r')
+        print("List of MAC addresses found. Displaying now...\n\n")
+        for mac_line in mac_file:
+            mac_addr.append(mac_line)
+        print(mac_line)
+    except IOError:
+        print("No MAC addresses found.\n")
+    
 def parse():
+    p = re.compile(r'(?:[0-9a-fA-F]:?){12}')
+
+    macads = []
+
     f = open("data.txt", "r")
     lines = f.readlines()
     f.close
@@ -17,10 +29,10 @@ def parse():
                 macads.append(match[0])
 
 
-    new_file = open('mac_address.txt', 'w')
-    new_file.close()
     mac_addr = []
     if macads != []:
+        new_file = open('mac_address.txt', 'w')
+        new_file.close()
         for addr in macads:
             sta_file = open('MAC Address - ' + addr, 'w')
             for line in lines:
@@ -76,11 +88,15 @@ def parse():
                 sta_file.close()
 
     for addr in macads:
-        print("yay")
-        print(addr)
         sta_file = open('MAC Address - ' + addr, 'r')
-        sta_file.read()
+        all_text = sta_file.read()
+        print("\n\n")
+        print(all_text)
         sta_file.close()
 
         new_file.close()
-parse()
+
+
+if __name__ == '__main__':
+    parse()
+    display_sta()

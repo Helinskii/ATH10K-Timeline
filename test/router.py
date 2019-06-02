@@ -25,7 +25,25 @@ if option == '1':
     display()
     parsing_new.parse()
 elif option == '2':
-    parsing_new.display_sta() # Try and exception block to be implemented.
+    parsing_new.display_sta()
+
+    while True:
+        option = input("Select a MAC Address to display information for [1/2/3..]: ")
+        try:
+            val = int(option)
+        except ValueError:
+            print('Invalid Option\n')
+            continue
+
+        try:
+            parsing_new.display_macinfo(val)
+            print('You got it\n')
+            quit()
+            
+        except IndexError:
+            print("Out of range\n")
+            continue
+        
 
 elif option == '3':
     quit()

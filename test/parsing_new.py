@@ -2,18 +2,34 @@
 
 import re
 
+def display_macinfo(mac_number):
+    mac_addr = []
+    mac_file = open('mac_address.txt', 'r')
+    for mac_line in mac_file:
+        mac_addr.append(mac_line.rstrip('\n'))
+
+    mac_file.close()
+    mac_filename = 'MAC Address - ' + mac_addr[mac_number - 1]
+
+    mac_file = open(mac_filename, 'r')
+    mac_info = mac_file.read()
+    print(mac_info)
+
 def display_sta():
     mac_addr = []
 
     try:
         mac_file = open('mac_address.txt', 'r')
         print("List of MAC addresses found. Displaying now...\n\n")
+        i = 1
         for mac_line in mac_file:
-            mac_addr.append(mac_line)
-        print(mac_line)
+            print(str(i) + '. ', end = '')
+            print(mac_line + '\n')
+
     except IOError:
         print("No MAC addresses found.\n")
-    
+        quit()
+        
 def parse():
     p = re.compile(r'(?:[0-9a-fA-F]:?){12}')
 

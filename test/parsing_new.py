@@ -29,7 +29,7 @@ def display_sta():
     except IOError:
         print("No MAC addresses found.\n")
         quit()
-        
+
 def parse():
     p = re.compile(r'(?:[0-9a-fA-F]:?){12}')
 

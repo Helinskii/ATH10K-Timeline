@@ -25,6 +25,7 @@ def display_sta():
         for mac_line in mac_file:
             print(str(i) + '. ', end = '')
             print(mac_line + '\n')
+            i = i + 1
 
     except IOError:
         print("No MAC addresses found.\n")
@@ -73,7 +74,7 @@ def parse():
 
                 if ma > 0 and asc > 0:
                     sta_file.write('At time: ' + time + 's from startup\n')
-                    sta_file.write('The station with MAC Address' + addr + ' has been associated with the AP\n\n')
+                    sta_file.write('The station with MAC Address ' + addr + ' has been associated with the AP\n\n')
                     new_file = open('mac_address.txt', 'r+')
                     for mac_line in new_file:
                         mac_addr.append(mac_line)

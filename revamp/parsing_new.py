@@ -42,22 +42,25 @@ def parse():
         if match[0] not in macads:
             macads.append(match[0])
 
-#    print(macads)
-    i = 0
-    edit_line = []
-    for _ in lines:
-        edit_line.append(lines[i][40:])
-        i = i + 1
+    print(macads)
+    error_lines = []
+    mac_lines = []
+    wmi_lines = []
+    misc_lines = []
+    for line in lines:
+        start_point = line.find("0000:00:00.0: ")
+        error_lines.append(line[start_point + 14:])
 
- #   for line in edit_line:
- #       print(line)
+    for line in error_lines:
+        if line.split(' ')[0] == 'mac':
+            mac_lines.append(line)
+            
+        elif line.split(' ')[0] == 'wmi':
+            wmi_lines.append(line)
 
- mac_addr = []
- if macads != []:
-     new_file = open('mac_address.txt', 'w')
-     new_file.close()
-     for addr in macads:
-         sta_file = open('MAC address - ' + addr, 'a')
+        else:
+            misc_lines.append(line)
+
 
 if __name__ == "__main__":
     parse()

@@ -70,7 +70,7 @@ def parse():
                     sta_file.write('At time: ' + time + 's from startup\n')
                     sta_file.write('New peer connection request from station with MAC address: ' + addr + '\n')
                     sta_file.write('Station Number is: ' + station + ' out of 512\n')
-                    sta_file.write('Peer Number is: ' + peer + ' out of 529\n\n')
+                    sta_file.write('Peer Number is: ' + peer + ' out of 528\n\n')
 
                 if ma > 0 and asc > 0:
                     sta_file.write('At time: ' + time + 's from startup\n')

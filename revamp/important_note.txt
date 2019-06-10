@@ -1,0 +1,3 @@
+WMI_PEER_FLAGS_MAP pertains to the main version of WMI that is being used.
+Based on the version of WMI, the PEER FLAGS are set. This is done through 'case'
+statements in 'wmi.c'. (Check line 9327)

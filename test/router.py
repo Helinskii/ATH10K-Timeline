@@ -37,7 +37,6 @@ elif option == '2':
 
         try:
             parsing_new.display_macinfo(val)
-            print('You got it\n')
             quit()
             
         except IndexError:

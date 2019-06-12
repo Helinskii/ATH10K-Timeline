@@ -115,11 +115,11 @@ def parse():
 
                 sta_file.close()
 
-    for addr in macads:
-        sta_file = open('MAC Address - ' + addr, 'r')
-        all_text = sta_file.read()
-        print("\n\n")
-        print(all_text)
+#    for addr in macads:
+#        sta_file = open('MAC Address - ' + addr, 'r')
+#        all_text = sta_file.read()
+#        print("\n\n")
+#        print(all_text)
         sta_file.close()
 
         new_file.close()

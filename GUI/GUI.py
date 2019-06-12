@@ -1,14 +1,16 @@
+#!/usr/bin/python3
+
 from tkinter import *
 import random
-from PIL import ImageTk, Image
+#from PIL import ImageTk, Image
 root = Tk()
 root.geometry("700x750+100+100")
 root.configure(background='deepskyblue')
 root.title("ATH10K TIMELINE")
-path = r"C:\Users\Pranav\Desktop"
-img = ImageTk.PhotoImage(Image.open(path))
-panel = Label(root, image = img)
-panel.pack(side = "bottom", fill = "both", expand = "yes")
+#path = r"C:\Users\Pranav\Desktop"
+#img = ImageTk.PhotoImage(Image.open(path))
+#panel = Label(root, image = img)
+#panel.pack(side = "bottom", fill = "both", expand = "yes")
 
 main_menu = Menu(root)
 root.config(menu=main_menu)

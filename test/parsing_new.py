@@ -62,7 +62,6 @@ def parse():
                 pc = line.find('peer create')
                 dasc = line.find('disassociated')
                 pd = line.find('peer delete')
-                flag_loc = line.find('flags')
                 time = line[2:9]
 
                 if ma > 0 and m > 0 and pc > 0:
@@ -85,20 +84,11 @@ def parse():
 
                     new_file.close()
 
-                if ma > 0 and vht > 0 and flag_loc > 0:
-                    flag_end = line.find('peer_bw_rxnss_override')
-                    flag = int(line[flag_loc + 6:flag_end - 1], 16)
-
-                    flag_list = flag_decode(flag)
+                if ma > 0 and vht > 0:
                     
                     sta_file.write('At time: ' + time + 's from startup\n')
                     sta_file.write('Channel with Station ' + station + ' has Very High Transmission Capabilites\n')
                     sta_file.write('Maximum Length of A-MPDU: ' + line[vht + 36: vht + 42] + ' bytes\n\n')
-                    sta_file.write('Following are the flags enabled for this client:\n\n')
-
-                    for f in flag_list:
-                        sta_file.write(f + '\n')
-                    sta_file.write('\n\n')
                     
                 if ma > 0 and phm > 0:
                     sta_file.write('At time: ' + time + 's from startup\n')

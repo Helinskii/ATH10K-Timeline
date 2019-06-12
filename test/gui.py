@@ -34,9 +34,12 @@ def fetch():
         mac_file = open('mac_address.txt', 'r')
         T.delete(1.0, END)
         T.insert(INSERT, "MAC file found\n\n")
-
-        for mac_line in mac_file:
-            fileMenu.add_command(label=mac_line.rstrip('\n'), command= lambda: sta_data(mac_line))
+        mac_addr = []
+        i = 0
+        for mac in mac_file:
+            mac_addr.append(mac.rstrip('\n'))
+            fileMenu.add_command(label=mac_addr[i], command= lambda: sta_data(mac_addr[i]))
+            i += 1
 
     except IOError:
         T.insert(INSERT, "MAC file not found")
@@ -44,6 +47,7 @@ def fetch():
     T.config(state="disabled")
 
 def sta_data(mac_addr):
+    print(mac_addr)
     T.config(state="normal")
 
     T.insert(INSERT, "Showing parsed log for - " + mac_addr + "\n\n")
@@ -64,6 +68,7 @@ def sta_data(mac_addr):
             flag_end = line.find('peer_bw_rxnss_override')
             flag = int(line[flag_loc + 6:flag_end - 1], 16)
             flag_list = parsing.flag_decode(flag)
+            print(flag_list)
         else:
             continue
 

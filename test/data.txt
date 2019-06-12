@@ -86,17 +86,3 @@
 [ 1657.967617] ath10k_pci 0000:00:00.0: wmi peer assoc vdev 0 addr 48:9d:d1:2b:af:f8 (new)
 [ 1657.967643] ath10k_pci 0000:00:00.0: wmi vdev 0 peer 0x48:9d:d1:2b:af:f8 set param 1 value 0
 [ 1657.978408] ath10k_pci 0000:00:00.0: mac ampdu vdev_id 0 sta 48:9d:d1:2b:af:f8 tid 0 action 0
-[  397.763681] ath10k_pci 0000:00:00.0: mac vdev 0 peer create 64:a2:f9:c6:20:91 (new sta) sta 1 / 512 peer 2 / 528
-[  397.763705] ath10k_pci 0000:00:00.0: wmi peer create vdev_id 0 peer_addr 64:a2:f9:c6:20:91
-[  397.767650] ath10k_pci 0000:00:00.0: mac sta 64:a2:f9:c6:20:91 associated
-[  397.767675] ath10k_pci 0000:00:00.0: mac ht peer 64:a2:f9:c6:20:91 mcs cnt 16 nss 2
-[  397.767684] ath10k_pci 0000:00:00.0: mac peer 64:a2:f9:c6:20:91 phymode 11ac-vht80
-[  397.767698] ath10k_pci 0000:00:00.0: mac vht peer 64:a2:f9:c6:20:91 max_mpdu 1048575 flags 0x601b001 peer_bw_rxnss_override 0x0
-[  397.767706] ath10k_pci 0000:00:00.0: mac peer 64:a2:f9:c6:20:91 qos 1
-[  397.767724] ath10k_pci 0000:00:00.0: wmi peer assoc vdev 0 addr 64:a2:f9:c6:20:91 (new)
-[  397.767748] ath10k_pci 0000:00:00.0: wmi vdev 0 peer 0x64:a2:f9:c6:20:91 set param 1 value 0
-[  397.883502] ath10k_pci 0000:00:00.0: mac ampdu vdev_id 0 sta 64:a2:f9:c6:20:91 tid 0 action 0
-[  404.641046] ath10k_pci 0000:00:00.0: mac ampdu vdev_id 0 sta 64:a2:f9:c6:20:91 tid 0 action 1
-[  404.641088] ath10k_pci 0000:00:00.0: mac sta 64:a2:f9:c6:20:91 disassociated
-[  404.641124] ath10k_pci 0000:00:00.0: mac vdev 0 peer delete 64:a2:f9:c6:20:91 sta 86f11608 (sta gone)
-[  404.641139] ath10k_pci 0000:00:00.0: wmi peer delete vdev_id 0 peer_addr 64:a2:f9:c6:20:91

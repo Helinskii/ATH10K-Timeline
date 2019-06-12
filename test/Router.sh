@@ -7,5 +7,3 @@ if [ $RESULT -eq 124 ] || [ $RESULT -eq 1 ]; then
 else
   echo 'File Received: Starting to parse...'
 fi
-
-

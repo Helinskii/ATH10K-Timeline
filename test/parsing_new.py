@@ -62,7 +62,7 @@ def parse():
                 pc = line.find('peer create')
                 dasc = line.find('disassociated')
                 pd = line.find('peer delete')
-                flag = line.find('flags')
+                flag_loc = line.find('flags')
                 time = line[2:9]
 
                 if ma > 0 and m > 0 and pc > 0:
@@ -85,9 +85,9 @@ def parse():
 
                     new_file.close()
 
-                if ma > 0 and vht > 0 and flag > 0:
+                if ma > 0 and vht > 0 and flag_loc > 0:
                     flag_end = line.find('peer_bw_rxnss_override')
-                    flag = int(line[flag + 6:flag_end - 1], 16)
+                    flag = int(line[flag_loc + 6:flag_end - 1], 16)
 
                     flag_list = flag_decode(flag)
                     

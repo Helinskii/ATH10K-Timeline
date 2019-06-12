@@ -45,31 +45,43 @@ def fetch():
 
 def sta_data(mac_addr):
     T.config(state="normal")
-    
-    mac_filename = 'MAC Address - ' + mac_addr
-    T.insert(INSERT, mac_filename)
 
+    T.insert(INSERT, "Showing parsed log for - " + mac_addr + "\n\n")
+    mac_filename = 'MAC Address - ' + mac_addr.rstrip('\n')
+
+    mac_file = open(mac_filename, 'r')
+    mac_info = mac_file.read()
+    mac_file.close()
+
+    T.insert(INSERT, mac_info)
+    T.insert(INSERT, "\n\n")
+
+    log_file = open("data.txt", "r")
+    lines = log_file.readlines()
+    for line in lines:
+        flag_loc = line.find('flags')
+        if flag_loc > 0:
+            flag_end = line.find('peer_bw_rxnss_override')
+            flag = int(line[flag_loc + 6:flag_end - 1], 16)
+            flag_list = parsing.flag_decode(flag)
+        else:
+            continue
+
+    flag_display(flag_list)
+        
     T.config(state="disabled")
-
-
-
-
-
-
-
     
-def _fun1():
-#    T.config(state="normal")
-    mac()
-    flag()
-    T.config(state="disabled")
+
+def display_log():
+    pass
     
-def flag():
+def flag_display(flags):
     txt.config(state="normal")
-    txt.insert(INSERT, "Flaf1\n")
-    txt.insert(INSERT, "Flag2\n")
-    txt.insert(INSERT, "Flag3\n")
-
+    txt.delete(1.0, END)
+    
+    for flag in flags:
+        txt.insert(INSERT, flag + '\n')
+    
     txt.config(state="disabled")
 
 def _quit():
@@ -86,11 +98,11 @@ def dele():
     T.config(state="disabled")
 
 
-Button1 = Button(root,text="Fetch",command= fetch)
+Button1 = Button(root,text="Fetch", command= fetch)
 
-Button2 = Button(root,text="Display",command= _fun1)
+Button2 = Button(root,text="Display", command= display_log)
 
-Button4 = Button(root,text="Quit",command=  quit)
+Button4 = Button(root,text="Quit", command=  quit)
 
 
 Button1.pack()

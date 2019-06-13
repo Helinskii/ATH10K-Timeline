@@ -16,8 +16,20 @@ main_menu = Menu(root)
 root.config(menu=main_menu)
 fileMenu = Menu(main_menu)
 main_menu.add_cascade(label="STAs",menu=fileMenu)
-T = Text(root,height=47, width=65, bg="linen",bd= 5)
+
+T = Text(root,height=47, width=65, bg="linen",bd=5)
 txt = Text(root,height=21, width=20, bg="lightblue",bd=4)
+T.configure(state="disabled")
+
+main_heading = Label(root, text = "Qualcomm\nChallenge")
+main_heading.config(font=('Courier', 23,"bold"),bd=6,bg="deepskyblue",fg="darkslategray")
+main_heading.pack()
+main_heading.place(x=0, y=15, height=85, width=220)
+
+flag_heading = Label(root, text = "Flags")
+flag_heading.config(font=('Courier', 15,"bold"),bd=6,bg="deepskyblue",fg="darkslategray")
+flag_heading.pack()
+flag_heading.place(x=0, y=425, height=20, width=220)
 
 def display():
     subprocess.call(['./Router.sh'])
@@ -42,7 +54,7 @@ def fetch():
 def sta_data(mac_addr):
     print(mac_addr)
     T.config(state="normal")
-
+    T.delete(1.0, END)
     T.insert(INSERT, "Showing parsed log for - " + mac_addr + "\n\n")
     mac_filename = 'MAC Address - ' + mac_addr.rstrip('\n')
 
@@ -56,6 +68,9 @@ def sta_data(mac_addr):
     log_file = open("data.txt", "r")
     lines = log_file.readlines()
     log_file.close()
+
+    flag_list = []
+    
     for line in lines:
         flag_loc = line.find('flags')
         ma = line.find(mac_addr)
@@ -67,7 +82,11 @@ def sta_data(mac_addr):
         else:
             continue
 
-    flag_display(flag_list)
+    txt.configure(state="normal")
+    txt.delete(1.0, END)
+    txt.configure(state="disabled")
+    if flag_list:
+        flag_display(flag_list)
         
     T.config(state="disabled")
     
@@ -111,16 +130,16 @@ Button3 = Button(root, text='Delete', command= dele)
 Button4 = Button(root,text="Quit", command=  quit)
 
 Button1.pack()
-Button1.place(x = 50, y = 100, height=50, width=100)
+Button1.place(x = 62, y = 115, height=50, width=100)
 
 Button2.pack()
-Button2.place(x = 50, y = 175, height=50, width=100)
+Button2.place(x = 62, y = 190, height=50, width=100)
 
 Button3.pack()
-Button3.place(x = 50, y = 250, height=50, width=100)
+Button3.place(x = 62, y = 265, height=50, width=100)
 
 Button4.pack()
-Button4.place(x = 50, y = 325, height=50, width=100)
+Button4.place(x = 62, y = 340, height=50, width=100)
 
 Button1.config(font=(' Serif', 15,"bold"),bd=8,bg="gray",fg="black")
 Button2.config(font=('Serif', 15,"bold"),bd=8,bg="gray",fg="black")

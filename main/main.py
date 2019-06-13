@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import parsing_new as parsing
+import parsing
 from tkinter import *
 import random
 import sys
@@ -9,7 +9,7 @@ from functools import partial
 
 root = Tk()
 root.geometry("780x830+100+100")
-root.configure(background='deepskyblue')
+root.configure(background='RoyalBlue1')
 root.title("ATH10K TIMELINE")
 
 main_menu = Menu(root)
@@ -17,17 +17,17 @@ root.config(menu=main_menu)
 fileMenu = Menu(main_menu)
 main_menu.add_cascade(label="STAs",menu=fileMenu)
 
-T = Text(root,height=47, width=65, bg="linen",bd=5)
+T = Text(root,height=47, width=65, bg="lemonchiffon",bd=5)
 txt = Text(root,height=21, width=20, bg="lightblue",bd=4)
 T.configure(state="disabled")
 
 main_heading = Label(root, text = "Qualcomm\nChallenge")
-main_heading.config(font=('Courier', 23,"bold"),bd=6,bg="deepskyblue",fg="darkslategray")
+main_heading.config(font=('Courier', 23,"bold"),bd=6,bg="RoyalBlue1",fg="darkslategray")
 main_heading.pack()
 main_heading.place(x=0, y=15, height=85, width=220)
 
 flag_heading = Label(root, text = "Flags")
-flag_heading.config(font=('Courier', 15,"bold"),bd=6,bg="deepskyblue",fg="darkslategray")
+flag_heading.config(font=('Courier', 15,"bold"),bd=6,bg="RoyalBlue1",fg="darkslategray")
 flag_heading.pack()
 flag_heading.place(x=0, y=425, height=20, width=220)
 
@@ -141,10 +141,10 @@ Button3.place(x = 62, y = 265, height=50, width=100)
 Button4.pack()
 Button4.place(x = 62, y = 340, height=50, width=100)
 
-Button1.config(font=(' Serif', 15,"bold"),bd=8,bg="gray",fg="black")
-Button2.config(font=('Serif', 15,"bold"),bd=8,bg="gray",fg="black")
-Button3.config(font=(' Serif', 15,"bold"),bd=8,bg="gray",fg="black")
-Button4.config(font=('Serif', 15,"bold"),bd=8,bg="gray",fg="black")
+Button1.config(font=(' Serif', 15,"bold"),bd=8,bg="lightcyan",fg="black")
+Button2.config(font=('Serif', 15,"bold"),bd=8,bg="lightcyan",fg="black")
+Button3.config(font=(' Serif', 15,"bold"),bd=8,bg="lightcyan",fg="black")
+Button4.config(font=('Serif', 15,"bold"),bd=8,bg="lightcyan",fg="black")
 
 T.pack()
 T.place(x=240,y=10)

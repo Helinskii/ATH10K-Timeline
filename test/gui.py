@@ -6,22 +6,18 @@ import random
 import sys
 import subprocess
 from functools import partial
-from PIL import ImageTk, Image
+
 root = Tk()
-root.geometry("700x750+100+100")
+root.geometry("780x830+100+100")
 root.configure(background='deepskyblue')
 root.title("ATH10K TIMELINE")
-path = r"./qualcomm_logo.png"
-img = ImageTk.PhotoImage(Image.open(path))
-panel = Label(root, image = img)
-panel.pack(side = "bottom", fill = "both", expand = "yes")
 
 main_menu = Menu(root)
 root.config(menu=main_menu)
 fileMenu = Menu(main_menu)
 main_menu.add_cascade(label="STAs",menu=fileMenu)
-T = Text(root,height=40, width=55,bg="linen",bd= 5)
-txt = Text(root,height=21, width=20,bg="lightblue",bd=4)
+T = Text(root,height=47, width=65, bg="linen",bd= 5)
+txt = Text(root,height=21, width=20, bg="lightblue",bd=4)
 
 def display():
     subprocess.call(['./Router.sh'])
@@ -110,25 +106,32 @@ Button1 = Button(root,text="Fetch", command= fetch)
 
 Button2 = Button(root,text="Display", command= display_log)
 
+Button3 = Button(root, text='Delete', command= dele)
+
 Button4 = Button(root,text="Quit", command=  quit)
 
-
 Button1.pack()
-Button1.place(x = 20, y = 50, height=50, width=100)
+Button1.place(x = 50, y = 100, height=50, width=100)
+
 Button2.pack()
-Button2.place(x = 20, y = 125, height=50, width=100)
+Button2.place(x = 50, y = 175, height=50, width=100)
+
+Button3.pack()
+Button3.place(x = 50, y = 250, height=50, width=100)
+
 Button4.pack()
-Button4.place(x = 20, y = 275, height=50, width=100)
+Button4.place(x = 50, y = 325, height=50, width=100)
+
 Button1.config(font=(' Serif', 15,"bold"),bd=8,bg="gray",fg="black")
 Button2.config(font=('Serif', 15,"bold"),bd=8,bg="gray",fg="black")
+Button3.config(font=(' Serif', 15,"bold"),bd=8,bg="gray",fg="black")
 Button4.config(font=('Serif', 15,"bold"),bd=8,bg="gray",fg="black")
+
 T.pack()
-T. place(x=220,y=50)
+T.place(x=240,y=10)
 txt.pack()
-txt. place(x=20,y=350)
-btn = Button(root, text='Delete', command= dele)
-btn.place(x = 20, y = 200, height=50, width=100)
-btn.config(font=(' Serif', 15,"bold"),bd=8,bg="gray",fg="black")
+txt.place(x=20,y=450)
+
 
 root.mainloop()
 

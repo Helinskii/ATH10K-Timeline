@@ -26,7 +26,7 @@ main_heading.config(font=('Courier', 23,"bold"),bd=6,bg="RoyalBlue1",fg="lightcy
 main_heading.pack()
 main_heading.place(x=0, y=15, height=85, width=220)
 
-flag_heading = Label(root, text = "Flags")
+flag_heading = Label(root, text = "WMI Peer Flags")
 flag_heading.config(font=('Courier', 15,"bold"),bd=6,bg="RoyalBlue1",fg="lightcyan")
 flag_heading.pack()
 flag_heading.place(x=0, y=425, height=20, width=220)

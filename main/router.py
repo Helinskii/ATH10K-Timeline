@@ -2,7 +2,7 @@
 
 import sys
 import subprocess
-import parsing
+import parsing_menu
 
 def display():
     subprocess.call(['./Router.sh'])
@@ -23,9 +23,9 @@ print('\n')
 if option == '1':
     print('\n')
     display()
-    parsing.parse()
+    parsing_menu.parse()
 elif option == '2':
-    parsing.display_sta()
+    parsing_menu.display_sta()
 
     while True:
         option = input("Select a MAC Address to display information for [1/2/3..]: ")
@@ -36,7 +36,7 @@ elif option == '2':
             continue
 
         try:
-            parsing.display_macinfo(val)
+            parsing_menu.display_macinfo(val)
             quit()
             
         except IndexError:

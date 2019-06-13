@@ -92,8 +92,39 @@ def sta_data(mac_addr):
     
 
 def display_log():
-    pass
+    T.config(state="normal")
+    T.delete(1.0, END)
+
+    try:
+        mac_file = open('mac_address.txt', 'r')
+        mac_info = mac_file.readlines()
+        mac_file.close()
+
+    except IOError:
+        T.insert(INSERT, "No parsed data found. Kindly click 'Fetch'.")
+
+        # Debug Statement
+        print("No parsed data found. Click 'Fetch'.")
+        return
+
     
+    mac_addr = []
+    for mac in mac_info:
+        mac_addr.append(mac.rstrip('\n'))
+
+    # Debug Statement
+    print(mac_addr)
+
+    T.insert(INSERT, "Displaying all parsed logs\n\n")
+    for addr in mac_addr:
+        sta_file = open('MAC Address - ' + addr, 'r')
+        all_text = sta_file.read()
+
+        # Debug Statement
+        print(all_text)
+        T.insert(INSERT, all_text)
+        sta_file.close()
+
 def flag_display(flags):
     txt.config(state="normal")
     txt.delete(1.0, END)

@@ -5,6 +5,7 @@ from tkinter import *
 import random
 import sys
 import subprocess
+from functools import partial
 #from PIL import ImageTk, Image
 root = Tk()
 root.geometry("700x750+100+100")
@@ -34,15 +35,11 @@ def fetch():
         mac_file = open('mac_address.txt', 'r')
         T.delete(1.0, END)
         T.insert(INSERT, "MAC file found\n\n")
-        mac_addr = []
-        i = 0
-        for mac in mac_file:
-            mac_addr.append(mac.rstrip('\n'))
-            fileMenu.add_command(label=mac_addr[i], command= lambda: sta_data(mac_addr[i]))
-            i += 1
-
+        mac_addr = mac_file.readlines()
+        for mac in mac_addr:
+            fileMenu.add_command(label=mac.rstrip('\n'), command=partial(sta_data, mac.rstrip('\n')))
     except IOError:
-        T.insert(INSERT, "MAC file not found")
+        T.insert(INSERT, "MAC file not found\n\n")
      
     T.config(state="disabled")
 
@@ -62,9 +59,11 @@ def sta_data(mac_addr):
 
     log_file = open("data.txt", "r")
     lines = log_file.readlines()
+    log_file.close()
     for line in lines:
         flag_loc = line.find('flags')
-        if flag_loc > 0:
+        ma = line.find(mac_addr)
+        if ma > 0 and flag_loc > 0:
             flag_end = line.find('peer_bw_rxnss_override')
             flag = int(line[flag_loc + 6:flag_end - 1], 16)
             flag_list = parsing.flag_decode(flag)
@@ -101,6 +100,10 @@ def dele():
     T.config(state="normal")
     T.delete(1.0, END)
     T.config(state="disabled")
+
+    txt.config(state="normal")
+    txt.delete(1.0, END)
+    txt.config(state="disabled")
 
 
 Button1 = Button(root,text="Fetch", command= fetch)

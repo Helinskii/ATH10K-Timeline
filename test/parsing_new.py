@@ -110,7 +110,7 @@ def parse():
 #        all_text = sta_file.read()
 #        print("\n\n")
 #        print(all_text)
-        sta_file.close()
+#        sta_file.close()
 
         new_file.close()
 

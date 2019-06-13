@@ -149,8 +149,8 @@ def parse():
                     action_loc = line.find('action')
 
                     sta_file.write('At time: ' + time + 's from startup\n')
-                    sta_file.write('Target Identifier for ' + addr + ' = ' + line[tid_loc + 4] + '\n')
-                    sta_file.write('Following flag for A-MPDU (Aggregate MAC Protocol Data Unit) action was set:\n')
+                    sta_file.write('Target Identifier for ' + addr + ' = ' + line[tid_loc + 4] + '\n\n')
+                    sta_file.write('Following flag for A-MPDU (Aggregate MAC Protocol Data Unit) action for + ' + addr + '  was set:\n')
                     sta_file.write(ieee80211_ampdu_mlme_action[int(line[action_loc + 7])] + '\n\n')
                     
                     

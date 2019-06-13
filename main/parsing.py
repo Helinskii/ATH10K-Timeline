@@ -56,14 +56,56 @@ def parse():
                 sta_file = open('MAC Address - ' + addr, 'a')
                 asc = line.find('associated')
                 vht = line.find('vht peer')
+                ht = line.find('ht peer')
+                mcs = line.find('mcs')
                 phm = line.find('phymode')
                 ma = line.find(addr)
                 m = line.find('mac')
                 pc = line.find('peer create')
                 dasc = line.find('disassociated')
                 pd = line.find('peer delete')
+                ampdu = line.find('ampdu')
                 time = line[2:9]
 
+                dev_recov = line.find('device successfully recovered')
+
+                hif_err = line.find('Could not init hif')
+                core_err = line.find('Could not init core')
+                pmf_qos_warn = line.find('failed to enable PMF QOS')
+                dynamic_bw_warn = line.find('failed to enable dynamic BW')
+                adaptive_qcs_warn = line.find('failed to enable adaptive qcs')
+                burst_warn = line.find('failed to disable burst')
+                idle_ps_config_warn = line.find('failed to enable idle_ps_config')
+
+                ieee80211_ampdu_mlme_action = ["IEEE80211_AMPDU_RX_START",
+                                               "IEEE80211_AMPDU_RX_STOP",
+                                               "IEEE80211_AMPDU_TX_START",
+                                               "IEEE80211_AMPDU_TX_STOP_CONT",
+                                               "IEEE80211_AMPDU_TX_STOP_FLUSH",
+                                               "IEEE80211_AMPDU_TX_STOP_FLUSH_CONT",
+                                               "IEEE80211_AMPDU_TX_OPERATIONAL"]
+                
+                if hif_err > 0:
+                    sta_file.write('Could not initialize HIF.\nATH10K state changed to OFF.\n\n')
+
+                if core_err > 0:
+                    sta_file.write('Could not initialize CORE.\nHIF power down started.\n\n')
+
+                if pmf_qos_warn > 0:
+                    sta_file.write('Failed to enable parameter - PMF (Protected Management Frame) QoS (Quality of Service).\nStopping CORE.\n\n')
+
+                if dynamic_bw_warn > 0:
+                    sta_file.write('Failed to enable dynamic bandwidth.\nStopping CORE.\n\n')
+
+                if adaptive_qcs_warn > 0:
+                    sta_file.write('Failed to enable adaptive qcs.\nStopping CORE.\n\n')
+
+                if burst_warn > 0:
+                    sta_file.write('Failed to disable burst.\nStopping CORE.\n\n')
+                
+                if idle_ps_config_warn > 0:
+                    sta_file.write('Failed to enable idle ps config.\nStopping CORE.\n\n')
+                    
                 if ma > 0 and m > 0 and pc > 0:
                     station = line[pc + 44]
                     peer = line[pc + 57]
@@ -84,8 +126,15 @@ def parse():
 
                     new_file.close()
 
-                if ma > 0 and vht > 0:
-                    
+                if ma > 0 and ht > 0 and mcs > 0:
+                    peer_ht_rate = line.find('cnt') + 4
+                    nss = line.find('nss') + 4
+
+                    sta_file.write('At time: ' + time + 's from startup\n')
+                    sta_file.write('WMI Peer HT rate for ' + addr + ' = ' + line[peer_ht_rate:peer_ht_rate + 2] + '\n')
+                    sta_file.write('Number of Spatial Streams for ' + addr + ' = ' + line[nss:nss + 2] + '\n\n')
+
+                if ma > 0 and vht > 0:                    
                     sta_file.write('At time: ' + time + 's from startup\n')
                     sta_file.write('Channel with Station ' + station + ' has Very High Transmission Capabilites\n')
                     sta_file.write('Maximum Length of A-MPDU: ' + line[vht + 36: vht + 42] + ' bytes\n\n')
@@ -95,6 +144,16 @@ def parse():
                     sta_file.write('The mode of the connection is: 802.' + line[phm + 8:phm + 12] + '\n')
                     sta_file.write('The channel transmission capability is: ' + line[phm + 16:phm + 18] + ' Mhz\n\n')
 
+                if ma > 0 and ampdu > 0:
+                    tid_loc = line.find('tid')
+                    action_loc = line.find('action')
+
+                    sta_file.write('At time: ' + time + 's from startup\n')
+                    sta_file.write('Target Identifier for ' + addr + ' = ' + line[tid_loc + 4] + '\n')
+                    sta_file.write('Following flag for A-MPDU (Aggregate MAC Protocol Data Unit) action was set:\n')
+                    sta_file.write(ieee80211_ampdu_mlme_action[int(line[action_loc + 7])] + '\n\n')
+                    
+                    
                 if ma > 0 and dasc > 0:
                     sta_file.write('At time: ' + time + 's from startup\n')
                     sta_file.write('The station with MAC Address ' + addr + ' has been disassociated from the AP\n\n')
@@ -103,6 +162,10 @@ def parse():
                     sta_file.write('At time: ' + time + 's from startup\n')
                     sta_file.write('The peer created for the STA with address ' + addr + ' has been deleted\n\n\n')
 
+
+                if ma > 0 and dev_recov > 0:
+                    sta_file.write('INFO:\n')
+                    sta_file.write(addr + 'has been successfully recovered and has restarted.\nConnection has been reconfigured.\n\n\n')
                 sta_file.close()
 
         new_file.close()

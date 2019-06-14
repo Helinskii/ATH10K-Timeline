@@ -11,6 +11,8 @@ root = Tk()
 root.geometry("780x830+100+100")
 root.configure(background='RoyalBlue1')
 root.title("ATH10K TIMELINE")
+img = PhotoImage(file='~/Brain/qualcomm/ath10kdebug/main/qualcomm_logo.png')
+root.call('wm', 'iconphoto', root._w, img)
 
 main_menu = Menu(root)
 root.config(menu=main_menu)
@@ -37,6 +39,7 @@ def display():
 def fetch():
     display()
     parsing.parse()
+    parsing.new_parse()
     T.config(state="normal")
 
     try:
@@ -48,7 +51,7 @@ def fetch():
             fileMenu.add_command(label=mac.rstrip('\n'), command=partial(sta_data, mac.rstrip('\n')))
     except IOError:
         T.insert(INSERT, "MAC file not found\n\n")
-     
+
     T.config(state="disabled")
 
 def sta_data(mac_addr):
@@ -70,7 +73,7 @@ def sta_data(mac_addr):
     log_file.close()
 
     flag_list = []
-    
+
     for line in lines:
         flag_loc = line.find('flags')
         ma = line.find(mac_addr)
@@ -87,18 +90,18 @@ def sta_data(mac_addr):
     txt.configure(state="disabled")
     if flag_list:
         flag_display(flag_list)
-        
+
     T.config(state="disabled")
-    
+
 
 def display_log():
     T.config(state="normal")
     T.delete(1.0, END)
 
     try:
-        mac_file = open('mac_address.txt', 'r')
-        mac_info = mac_file.readlines()
-        mac_file.close()
+        log_file = open('parsed_data.txt', 'r')
+        log_info = log_file.read()
+        log_file.close()
 
     except IOError:
         T.insert(INSERT, "No parsed data found. Kindly click 'Fetch'.")
@@ -107,31 +110,17 @@ def display_log():
         print("No parsed data found. Click 'Fetch'.")
         return
 
-    
-    mac_addr = []
-    for mac in mac_info:
-        mac_addr.append(mac.rstrip('\n'))
-
-    # Debug Statement
-    print(mac_addr)
-
     T.insert(INSERT, "Displaying all parsed logs\n\n")
-    for addr in mac_addr:
-        sta_file = open('MAC Address - ' + addr, 'r')
-        all_text = sta_file.read()
-
-        # Debug Statement
-        print(all_text)
-        T.insert(INSERT, all_text)
-        sta_file.close()
+    T.insert(INSERT, log_info)
+    T.config(state="disabled")
 
 def flag_display(flags):
     txt.config(state="normal")
     txt.delete(1.0, END)
-    
+
     for flag in flags:
         txt.insert(INSERT, flag + '\n')
-    
+
     txt.config(state="disabled")
 
 def _quit():
@@ -184,5 +173,3 @@ txt.place(x=20,y=450)
 
 
 root.mainloop()
-
-

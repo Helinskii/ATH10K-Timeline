@@ -9,7 +9,7 @@ The GUI for the application is made using `tkinter`, and supports all the requir
 _The ATH10K driver in the Qualcomm *QCA9888* chipset provides debug log output during various actions and events. Since extensive logging can get chaotic and reduces readability in a developer environment, we had to hack together an application that would parse the debug log output from the chipset and make it more readable and navigable. The application needs to provide a timeline for various actions, events, warnings and error. We were to also parse the hexadecimal flags that the chipset produces in order to understand variable they pertain to._
 
 ###### We created the following application:
-![GUI](/other/screenshots/Image 1.png)
+![GUI](/other/screenshots/img.png)
 
 The application provides various events occuring in the chipset in a chronological fashion. The events are grouped together by the `Station Addresses (STAs)`.
 
